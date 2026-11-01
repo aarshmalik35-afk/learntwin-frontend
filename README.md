@@ -1,4 +1,4 @@
-# LearnTwin AI 3.0
+# LearnTwin AI 
 
 ### An AI-Powered Personalized Learning Diagnostic Platform
 
