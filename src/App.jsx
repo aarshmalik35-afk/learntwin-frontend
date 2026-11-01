@@ -26,7 +26,7 @@ function Header({ view, onHome, onAdaptive }) {
     <Brand />
     <nav className="topnav">
       <button className={`nav-link ${view === 'dashboard' ? 'active' : ''}`} onClick={onHome}>Overview</button>
-      <button className={`nav-link ${view === 'adaptive' ? 'active' : ''}`} onClick={onAdaptive}>Adaptive Practice</button>
+      <button type="button" className={`nav-link ${view === 'adaptive' ? 'active' : ''}`} onClick={onAdaptive} style={{ display: 'inline-flex', visibility: 'visible', opacity: 1, cursor: 'pointer' }}>Adaptive Practice</button>
       <span className="nav-pill"><span className="live-dot" /> Prototype</span>
       <div className="avatar">LT</div>
     </nav>
