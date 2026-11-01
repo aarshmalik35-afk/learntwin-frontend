@@ -1,223 +1,151 @@
 # LearnTwin AI 3.0
-### An AI-powered digital twin for personalized learning
 
-LearnTwin AI is a project built around a simple idea: students should understand more than just their marks. They should know what they're good at, where they're struggling, and what they can do to improve.
+### An AI-Powered Personalized Learning Diagnostic Platform
 
-The project explores how AI and digital twin technology can make learning more personalized. The current prototype focuses on cybersecurity education, where students can take an assessment, identify gaps in their knowledge, and receive personalized insights and recommendations.
+## Overview
 
-## What does it do?
+LearnTwin AI 3.0 is a prototype designed to help learners understand their knowledge gaps and identify areas where they need improvement.
 
-Instead of stopping at a score, LearnTwin AI tries to explain what that score actually means.
+The platform assesses a learner's understanding through a quiz and uses AI-generated insights to highlight weaknesses, suggest remedies, and recommend next steps. The goal is to make learning more personalized by turning assessment results into actionable feedback.
 
-- **Cybersecurity assessments:** Students answer questions to evaluate their understanding of cybersecurity concepts.
-- **Knowledge gap analysis:** The system identifies strengths and areas that need more attention based on assessment responses.
-- **AI-generated insights:** Google Gemini helps explain the results in a clear, understandable way.
-- **Personalized recommendations:** Students receive suggestions for what to revise and how to improve.
-- **Learning history:** Assessment results can be saved and reviewed later.
-- **Digital twin approach:** The assessment results form a representation of the student's current learning profile, providing a foundation for tracking progress over time.
-
-## How it works
-
-The application follows a straightforward workflow:
-
-1. The student completes a cybersecurity assessment.
-2. The backend evaluates their answers and identifies strengths and knowledge gaps.
-3. The assessment results are passed to Google Gemini to generate contextual feedback.
-4. The student receives insights, explanations, and recommended next steps.
-5. Assessment history can be used to review previous results.
-
-The assessment engine handles the structured evaluation, while Gemini helps turn those findings into more useful feedback.
-
-## Tech Stack
-
-| Technology | Purpose |
-|---|---|
-| React and Vite | Frontend and user interface |
-| Python and FastAPI | Backend and API development |
-| SQLite | Storing assessment history |
-| Google Gemini API | Generating personalized insights |
-| REST API | Communication between frontend and backend |
-| GitHub Pages | Frontend hosting |
-| Render | Backend hosting |
-
-## System Architecture
-
-```text
-Student
-   |
-   v
-React + Vite Frontend
-   |
-   v
-FastAPI Backend
-   |
-   +---- Assessment Engine
-   |          |
-   |          v
-   |     Score and Knowledge Gaps
-   |          |
-   |          v
-   |     Google Gemini
-   |          |
-   |          v
-   |     Personalized Insights
-   |
-   v
-SQLite Assessment History
-```
+The current prototype focuses on cybersecurity education and combines rule-based assessment logic with Google's Gemini API to generate explanations and learning recommendations.
 
 ## Live Demo
-
-Try the deployed application:
 
 - **Frontend:** https://aarshmalik35-afk.github.io/learntwin-frontend/
 - **Backend API:** https://learntwin-backend.onrender.com/
 - **API Documentation:** https://learntwin-backend.onrender.com/docs
 
-The backend may take a little time to respond if the hosted service has been idle.
+## Key Features
 
-## Running Locally
+- **Knowledge Assessment:** Evaluates learners through topic-based questions.
+- **Knowledge Gap Identification:** Highlights areas where a learner may need further practice.
+- **AI-Generated Insights:** Uses Gemini to provide explanations and personalized recommendations.
+- **Learning Remedies:** Suggests ways to improve understanding of weaker topics.
+- **Recommended Next Steps:** Provides guidance on what learners can study or practise next.
+- **Assessment History:** Stores previous assessment results using SQLite.
+- **Interactive Dashboard:** Presents assessment results and AI-generated feedback through a React-based interface.
+- **Cloud Deployment:** Frontend and backend are deployed separately, making the application accessible online.
 
-### Prerequisites
+## How It Works
 
-- Python 3.11 or a compatible version
-- Node.js and npm
-- A Google Gemini API key for AI-generated feedback
+1. The learner completes a cybersecurity assessment.
+2. The frontend sends the responses to the FastAPI backend.
+3. The backend evaluates the submitted answers and identifies potential knowledge gaps.
+4. The assessment results are used to generate additional insights through Google's Gemini API.
+5. The learner receives a summary of their performance, areas for improvement, suggested remedies, and recommended next steps.
+6. Assessment records can be stored and retrieved through the application's history functionality.
 
-### 1. Clone the repositories
+## Technology Stack
 
-```bash
-git clone https://github.com/aarshmalik35-afk/learntwin-frontend.git
-git clone https://github.com/aarshmalik35-afk/learntwin-backend.git
-```
+### Frontend
+- React
+- Vite
+- JavaScript
+- CSS
+- GitHub Pages
 
-### 2. Start the backend
+### Backend
+- Python
+- FastAPI
+- REST API
+- SQLite
 
-```bash
-cd learntwin-backend
-python -m venv .venv
-```
+### AI Integration
+- Google Gemini API
+- Rule-based assessment logic
+- AI-generated explanations and recommendations
 
-Activate the virtual environment.
+### Deployment
+- GitHub Pages for the frontend
+- Render for the backend
 
-**Windows:**
+## System Architecture
 
-```bash
-.venv\Scripts\activate
-```
+The application follows a frontend-backend architecture.
 
-**macOS/Linux:**
+**Frontend:** Provides the assessment interface and displays the learner's results.
 
-```bash
-source .venv/bin/activate
-```
+**Backend:** Handles API requests, processes assessment responses, calculates results, and manages assessment history.
 
-Install the dependencies:
+**AI Layer:** Uses Gemini to generate contextual explanations and learning recommendations based on assessment results.
 
-```bash
-pip install -r requirements.txt
-```
-
-Create a `.env` file in the backend repository root:
-
-```env
-GEMINI_API_KEY=your_gemini_api_key
-FRONTEND_ORIGIN=http://localhost:5173
-```
-
-Start the API:
-
-```bash
-uvicorn app.main:app --reload
-```
-
-The backend will run at `http://127.0.0.1:8000`.
-
-You can access the interactive API documentation at `http://127.0.0.1:8000/docs`.
-
-### 3. Start the frontend
-
-Open a separate terminal:
-
-```bash
-cd learntwin-frontend
-npm install
-```
-
-Create a `.env` file in the frontend repository root:
-
-```env
-VITE_API_BASE_URL=http://127.0.0.1:8000
-```
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open the local URL provided by Vite, usually `http://localhost:5173`.
-
-Make sure the backend's CORS configuration allows the frontend's local origin.
+**Database:** SQLite stores assessment history for retrieval.
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
+| Method | Endpoint | Purpose |
 |---|---|---|
-| GET | `/` | Basic API information |
-| GET | `/api/health` | Checks whether the backend is running |
-| GET | `/api/questions` | Returns assessment questions |
-| POST | `/api/assess` | Evaluates answers and returns assessment insights |
-| GET | `/api/history` | Retrieves saved assessment history |
+| GET | `/` | Root endpoint |
+| GET | `/api/health` | Checks backend availability |
+| GET | `/api/questions` | Retrieves assessment questions |
+| POST | `/api/assess` | Processes an assessment and generates results |
+| GET | `/api/history` | Retrieves previous assessment records |
 
-You can explore these endpoints through the FastAPI documentation at `/docs`.
+The complete API documentation is available through the live backend's `/docs` endpoint.
+
+## Running the Project Locally
+
+### Backend Setup
+
+1. Clone the backend repository: https://github.com/aarshmalik35-afk/learntwin-backend
+2. Install the Python dependencies listed in `requirements.txt`.
+3. Create a `.env` file containing the required environment variables:
+   - `GEMINI_API_KEY` — your Google Gemini API key.
+   - `FRONTEND_ORIGIN` — the frontend origin, such as `http://localhost:5173` during local development.
+4. Start the FastAPI application using Uvicorn.
+5. Open the backend API documentation to explore and test the available endpoints.
+
+### Frontend Setup
+
+1. Clone the frontend repository: https://github.com/aarshmalik35-afk/learntwin-frontend
+2. Install the dependencies listed in `package.json`.
+3. Configure `VITE_API_BASE_URL` to point to the running backend, such as `http://127.0.0.1:8000` during local development.
+4. Start the Vite development server.
+5. Open the local frontend URL in your browser.
 
 ## Deployment
 
-The frontend is hosted on GitHub Pages, while the backend runs on Render. GitHub Actions builds and deploys the frontend when changes are pushed to the configured branch.
+The frontend is hosted on GitHub Pages, while the backend runs on Render.
 
-The frontend uses this production API URL:
+The frontend communicates with the deployed backend through the configured API base URL. Cross-origin resource sharing (CORS) is configured to allow requests from the deployed frontend.
 
-```env
-VITE_API_BASE_URL=https://learntwin-backend.onrender.com
-```
+The Gemini API key is configured on the backend rather than exposed in the frontend code.
 
-For the Vite configuration, the GitHub Pages project path should match the repository name:
+## What I Learned
 
-```javascript
-base: "/learntwin-frontend/",
-```
+Building LearnTwin AI 3.0 gave me practical experience with:
 
-The backend uses the following Render start command:
+- Integrating a React frontend with a Python backend.
+- Designing and testing REST API endpoints.
+- Connecting an application to a generative AI service.
+- Combining rule-based logic with AI-generated explanations.
+- Storing and retrieving assessment history using SQLite.
+- Deploying a full-stack application using GitHub Pages and Render.
+- Debugging API communication, environment variables, and CORS configuration.
 
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port $PORT
-```
+## Future Improvements
 
-## What I learned from building this
+- Introduce adaptive assessments that adjust question difficulty based on learner performance.
+- Track progress across multiple assessments.
+- Add more cybersecurity topics and learning resources.
+- Improve explainability by showing how assessment rules contribute to identified knowledge gaps.
+- Develop a more structured learner profile using repeated assessment results.
+- Add authentication and individual learner accounts.
+- Evaluate the consistency and educational usefulness of AI-generated recommendations.
 
-This project brought together frontend development, backend APIs, database integration, cloud deployment, and generative AI in one application.
+## Limitations
 
-It also involved working through practical deployment issues, including connecting a separately hosted frontend and backend and configuring CORS correctly.
+LearnTwin AI 3.0 is an early-stage prototype. Its assessment results and AI-generated recommendations are intended to support learning and self-evaluation. They have not been independently validated as a measure of overall learning ability or future academic performance.
 
-More importantly, it gave me an opportunity to explore how AI-generated explanations can make assessment results more useful than a score alone.
+The quality of generated insights may vary depending on the assessment responses and the availability of the Gemini API.
 
-## What's next?
+## Author
 
-There is plenty of room to build on the current prototype. Some improvements I'd like to explore include:
+**Aarsh Malik**
 
-- Tracking changes in a student's knowledge profile across multiple assessments.
-- Adjusting question difficulty based on performance.
-- Adding visualizations for learning progress.
-- Expanding the platform to cover more cybersecurity topics.
-- Evaluating how accurate and useful the recommendations are over time.
+GitHub: https://github.com/aarshmalik35-afk
 
-## A note on the current version
+## Project Status
 
-LearnTwin AI is a working prototype. Its learning profile is based on assessment evidence, and its AI-generated recommendations are intended to support learning rather than replace formal evaluation. The effectiveness of its recommendations and any predictive capabilities would need further testing.
-
----
-
-**LearnTwin AI 3.0** is an exploration of how AI and digital twin concepts can help make learning more personal, understandable, and actionable.
-
-Built by Aarsh Malik.
+The application is deployed and functional as a prototype. Further work will focus on improving assessment quality, learner progress tracking, explainability, and personalization.
