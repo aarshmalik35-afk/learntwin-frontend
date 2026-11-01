@@ -84,26 +84,6 @@ The application follows a frontend-backend architecture.
 
 The complete API documentation is available through the live backend's `/docs` endpoint.
 
-## Running the Project Locally
-
-### Backend Setup
-
-1. Clone the backend repository: https://github.com/aarshmalik35-afk/learntwin-backend
-2. Install the Python dependencies listed in `requirements.txt`.
-3. Create a `.env` file containing the required environment variables:
-   - `GEMINI_API_KEY` — your Google Gemini API key.
-   - `FRONTEND_ORIGIN` — the frontend origin, such as `http://localhost:5173` during local development.
-4. Start the FastAPI application using Uvicorn.
-5. Open the backend API documentation to explore and test the available endpoints.
-
-### Frontend Setup
-
-1. Clone the frontend repository: https://github.com/aarshmalik35-afk/learntwin-frontend
-2. Install the dependencies listed in `package.json`.
-3. Configure `VITE_API_BASE_URL` to point to the running backend, such as `http://127.0.0.1:8000` during local development.
-4. Start the Vite development server.
-5. Open the local frontend URL in your browser.
-
 ## Deployment
 
 The frontend is hosted on GitHub Pages, while the backend runs on Render.
