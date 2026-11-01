@@ -1,3 +1,4 @@
+import AdaptivePractice from "./components/AdaptivePractice";
 import { useEffect, useMemo, useState } from 'react'
 import {
   Activity, ArrowLeft, ArrowRight, Award, BookOpen, BrainCircuit, Check,
@@ -20,11 +21,12 @@ function Brand() {
   </div>
 }
 
-function Header({ view, onHome }) {
+function Header({ view, onHome, onAdaptive }) {
   return <header className="topbar">
     <Brand />
     <nav className="topnav">
       <button className={`nav-link ${view === 'dashboard' ? 'active' : ''}`} onClick={onHome}>Overview</button>
+      <button className={`nav-link ${view === 'adaptive' ? 'active' : ''}`} onClick={onAdaptive}>Adaptive Practice</button>
       <span className="nav-pill"><span className="live-dot" /> Prototype</span>
       <div className="avatar">LT</div>
     </nav>
@@ -244,14 +246,16 @@ export default function App() {
     finally { setBusy(false) }
   }
   const home = () => { setView('dashboard'); setError('') }
+  const openAdaptive = () => { setView('adaptive'); setError('') }
   const restart = () => { setResult(null); startQuiz() }
 
   return <div className="app-shell">
-    <Header view={view} onHome={home} />
+    <Header view={view} onHome={home} onAdaptive={openAdaptive} />
     <main className="page-content">
       {view === 'dashboard' && <>{error && <div className="global-error"><TriangleAlert size={16} />{error}<button onClick={() => setError('')}><XCircle size={15} /></button></div>}<Dashboard onStart={startQuiz} history={history} health={health} onShowHistory={() => setShowHistory(true)} />{loadingQuestions && <div className="loading-overlay"><div className="loading-card"><span className="spinner dark" /><b>Preparing your diagnostic…</b></div></div>}</>}
       {view === 'quiz' && <Quiz questions={questions} onSubmit={submit} onCancel={home} busy={busy} error={error} />}
       {view === 'results' && result && <Results result={result} onRestart={restart} onHome={home} />}
+      {view === 'adaptive' && <section className="adaptive-page"><div className="welcome-row"><div><div className="eyebrow">TARGETED CYBERSECURITY PRACTICE <span className="eyebrow-line" /></div><h1>Practise with <span>evidence.</span></h1><p className="subhead">Answer a focused follow-up question and review the reasoning behind your learning signal.</p></div><button className="btn-secondary" onClick={home}><ArrowLeft size={16} /> Overview</button></div><AdaptivePractice /></section>}
     </main>
     <footer className="footer"><Brand /><div>LearnTwin AI <span>·</span> Understand learning. Improve with evidence.</div><span className="footer-right">Prototype v1.0</span></footer>
     {showHistory && <HistoryModal history={history} onClose={() => setShowHistory(false)} />}
